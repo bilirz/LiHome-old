@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }}的能量值 - Li</title>
+</head>
+<body>
+{% extends "father.html" %}
+{% block content %}
+<div class="layui-panel">
+    <div style="padding: 30px;">
+        <h1 class="display-4">{{ name }}</h1>
+        <div id="main" style="width: auto;height:400px;"></div>
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">能量值</label>
+                <div class="layui-input-block">
+                    <input type="text" id="evalue" placeholder="能量值（0-1000）" class="layui-input"></input>
+                </div>
+            </div>
+        </form>
+        <button id="swap" class="layui-btn" style="margin: 5px">添加</button>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById("main"));
+  
+        // 指定图表的配置项和数据
+        var option = {
+            tooltip: {
+                trigger: "axis"
+            },
+            xAxis: {
+                data: {{xAxis|safe}}
+            },
+            yAxis: {},
+            series: [
+                {
+                data: {{series}},
+                type: "line",
+                smooth: true,
+                }
+            ],
+            };;
+  
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+</script>
+<script>
+        const evalue = document.getElementById("evalue");
+        const swap = document.getElementById("swap");
+    
+        function All() {
+        $.ajax({
+            type: "POST",
+            url: "/energy/{{name}}",
+            dataType: "json",
+            data:{"evalue": evalue.value},
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+    swap.addEventListener("click", All);
+
+</script>
+{% endblock %}
+</body>
+</html>

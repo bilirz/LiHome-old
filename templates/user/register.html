@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - Li</title>
+</head>
+
+<body>
+{% extends "father.html" %}
+{% block content %}
+<div class="layui-panel">
+    <div style="padding: 30px;">
+        <form class="layui-form layui-form-pane">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-block">
+                    <input type="text" id="name" class="layui-input" placeholder="ID / 名称">
+                </div>
+            </div>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" id="password" class="layui-input" placeholder="密码">
+                </div>
+            </div>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">再次输入</label>
+                <div class="layui-input-block">
+                    <input type="password" id="again" class="layui-input" placeholder="密码">
+                    <span class="errormsg"></span>
+                </div>
+            </div>
+
+        </form>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="swap" class="layui-btn" style="margin: 5px">注册</button>
+                <a href="/user/login">
+                    <button class="layui-btn layui-btn-primary"
+                            style="margin: 5px">登录
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        const name = document.getElementById("name");
+        const password = document.getElementById("password");
+        const again = document.getElementById("again");
+        const swap = document.getElementById("swap");
+
+        function All() {
+            $.ajax({
+                type: "POST",
+                url: "/user/register",
+                dataType: "json",
+                data: {
+                    "name": name.value,
+                    "password": password.value,
+                    "again": again.value
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+        swap.addEventListener("click", All);
+        swap.onclick = function () {
+            $.post("/user/register", function (obj) {
+                layui.use("layer", function () {
+                    var layer = layui.layer;
+                    layer.msg(obj.errmsg);
+                });
+            }, "json");
+        }
+
+</script>
+{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>添加记账信息 - Li</title>
+</head>
+
+<body>
+{% extends "father.html" %}
+{% block content %}
+<div class="layui-panel" style="margin-bottom :10px">
+    <div style="padding: 10px;">
+            <span class="layui-breadcrumb">
+                <a href="/">首页</a>
+                <a><cite>添加</cite></a>
+            </span>
+    </div>
+</div>
+<div>
+    <div class="layui-panel">
+        <div style="padding: 30px;">
+            <form class="layui-form layui-form-pane">
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">发起PK者</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="name" class="layui-input" placeholder="{{sname}}" disabled>
+                    </div>
+                </div>
+
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">接受PK者</label>
+                    <div class="layui-input-block">
+                        <select id="bname">
+                            {% for bname in bnames %}
+                            <option value="{{bname.name}}">{{ bname.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">承诺</label>
+                    <div class="layui-input-block">
+                        <textarea id="promise" placeholder="承诺" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">期限</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="dl" class="layui-input" placeholder="选择一个日期">
+                    </div>
+                </div>
+
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">奖励</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="award" placeholder="奖励" class="layui-input">
+                    </div>
+                </div>
+                <script>
+                        layui.use("laydate", function(){
+                          var laydate = layui.laydate;
+                          
+                          //执行一个laydate实例
+                          laydate.render({
+                            elem: "#dl" //指定元素
+                          });
+                        });
+
+                </script>
+
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">惩罚</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="punish" placeholder="惩罚" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">公证人</label>
+                    <div class="layui-input-block">
+                        <select id="notary">
+                            {% for notary in notarys %}
+                            <option value="{{notary.name}}">{{ notary.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+            </form>
+            <div class="layui-form-item" pane>
+                <div class="layui-input-block">
+                    <button id="swap" class="layui-btn" style="margin: 5px">立即记录</button>
+                    <a href="/pk/text">
+                        <button class="layui-btn layui-btn-primary"
+                                style="margin: 5px">查看
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    const bname = document.getElementById("bname");
+    const promise = document.getElementById("promise");
+    const dl = document.getElementById("dl");
+    const award = document.getElementById("award");
+    const punish = document.getElementById("punish");
+    const notary = document.getElementById("notary");
+
+    function All() {
+        $.ajax({
+            type: "POST",
+            url: "/pk",
+            dataType: "json",
+            data: {
+                "bname": bname.value,
+                "promise": promise.value,
+                "dl": dl.value,
+                "award": award.value,
+                "punish": punish.value,
+                "notary": notary.value
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+    swap.addEventListener("click", All);
+
+</script>
+{% endblock %}
+
+</html>

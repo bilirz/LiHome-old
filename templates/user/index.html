@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ infos["name"] }} - 用户 - Li</title>
+</head>
+
+<body>
+{% extends "father.html" %}
+{% block content %}
+<div class="layui-panel" style="margin-bottom: 10px;">
+    <div style="padding: 30px;">
+        <h1>{{ infos["name"] }}</h1>
+        <p style="margin: 10px;">的账号创立于{{ infos["time"] }}</p>
+    </div>
+</div>
+<div class="layui-panel" style="margin-bottom: 10px;"
+">
+<div style="padding: 30px;">
+    <h2>{{ infos["name"] }}的红帐</h2>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>记账人</th>
+            <th>原因</th>
+            <th>时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for redinfo in redinfos %}
+        <tr>
+            <td>{{ redinfo.name }}</td>
+            <td>{{ redinfo.text }}</td>
+            <td>{{ redinfo.time }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+<div class="layui-panel" style="margin-bottom: 10px;"
+">
+<div style="padding: 30px;">
+    <h2>{{ infos["name"] }}的黑帐</h2>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>记账人</th>
+            <th>原因</th>
+            <th>时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for blackinfo in blackinfos %}
+        <tr>
+            <td>{{ blackinfo.name }}</td>
+            <td>{{ blackinfo.text }}</td>
+            <td>{{ blackinfo.time }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+<div class="layui-panel" style="margin-bottom: 10px;"
+">
+<div style="padding: 30px;">
+    <h2>{{ infos["name"] }}记下的红帐</h2>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>记账人</th>
+            <th>原因</th>
+            <th>时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for wredinfo in wredinfos %}
+        <tr>
+            <td>{{ wredinfo.name }}</td>
+            <td>{{ wredinfo.text }}</td>
+            <td>{{ wredinfo.time }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+<div class="layui-panel" style="margin-bottom: 10px;"
+">
+<div style="padding: 30px;">
+    <h2>{{ infos["name"] }}记下的黑帐</h2>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>记账人</th>
+            <th>原因</th>
+            <th>时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for wblackinfo in wblackinfos %}
+        <tr>
+            <td>{{ wblackinfo.name }}</td>
+            <td>{{ wblackinfo.text }}</td>
+            <td>{{ wblackinfo.time }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}
+</body>
+
+</html>

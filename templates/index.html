@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎回家 - Li</title>
+</head>
+
+<body>
+{% extends "father.html" %}
+{% block content %}
+<div class="layui-row">
+    <div class="layui-panel">
+        <div style="padding: 30px;">
+            <h2 style="margin-bottom :20px; color: #2F4056;">欢迎回家！{{ sname }}</h2>
+            <a href="/redblack">
+                <button class="layui-btn" style="margin: 5px">记红黑账</button>
+            </a>
+            <a href="/days">
+                <button class="layui-btn" style="margin: 5px;">记特别日期</button>
+            </a>
+            <a href="/log">
+                <button class="layui-btn" style="margin: 5px;">看开发日志</button>
+            </a>
+            <a href="/game">
+                <button class="layui-btn" style="margin: 5px;">玩家庭游戏</button>
+            </a>
+            <a href="/energy/{{sname}}">
+                <button class="layui-btn" style="margin: 5px;">查{{sname}}的能量值</button>
+            </a>
+        </div>
+    </div>
+    <div class="layui-panel" style="margin-top: 20px;">
+        <div style="padding: 30px;">
+            <h3 style="margin-bottom :20px; color: #2F4056;">格言——健康十个一</h3>
+            <span style="margin-bottom :30px;">
+                <p>1.一个宽广的胸怀</p>
+                <p>2.一种合理的饮食习惯</p>
+                <p>3.一种规律的生活</p>
+                <p>4.一种热情开朗合群的性格</p>
+                <p>5.一种能调节身心的业余爱好</p>
+                <p>6.一种适合自己的锻炼方法</p>
+                <p>7.一种不向任何压力低头的意志</p>
+                <p>8.一种对待疾病的正确态度</p>
+                <p>9.一种对年龄的忘却</p>
+                <p>10.一种永远微笑的面孔</p>
+            </span>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="layui-row">
+    <div class="layui-panel layui-col-md4" style="margin-top: 20px;">
+        <div class="layui-card-header">
+            <h3 style="margin: 5px; color: #2F4056;">查看最新红黑帐</h3>
+        </div>
+        <div class="layui-card-body">
+            {% for i in redblack %}
+            <div class="layui-card-body">
+                <span>【{{i["time"]}}】{{i["name"]}}记录{{i["bname"]}}</span>
+                {% if i.color == "红" %}
+                <span style="color: rgb(255, 114, 114);">“{{i.color}}帐”</span>
+                {% elif i.color == "黑" %}
+                <span style="color: rgb(71, 71, 71);">“{{i.color}}帐”</span>
+                {% endif %}
+                <span>：{% if i.text == "" %}没有写原因，可以当面问问TA~{% else %}{{i.text}} {% endif %}</span>
+            </div>
+            {% endfor %}
+            <a href="/redblack/text">查看更多</a>
+        </div>
+    </div>
+    <div class="layui-panel layui-col-md4" style="margin-top: 20px;">
+        <div class="layui-card-header">
+            <h3 style="margin: 5px; color: #2F4056;">查看最新特殊日</h3>
+        </div>
+        <div class="layui-card-body">
+            {% for i in days %}
+            <div class="layui-card-body">
+            <span>
+                {{i["wtime"]}}：{{i["name"]}}
+                {% if i["bname"] == "null" %}
+                发布了公告
+                {% else %}
+                想要提醒
+                {{ i["bname"] }}
+                {% endif %}
+                <span>在【{{ i["time"] }}】这一天有【{{ i["why"] }}】事件。</span>
+            </span>
+            </div>
+            {% endfor %}
+            <a href="/days/text">查看更多</a>
+        </div>
+    </div>
+    <div class="layui-panel layui-col-md4" style="margin-top: 20px;">
+        <div class="layui-card-header">
+            <h3 style="margin: 5px; color: #2F4056;">查看最新排行榜</h3>
+        </div>
+        <div class="layui-card-body">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>硬币</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in pk %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.coin }}</td>
+                </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            <a href="/game/rank">查看更多</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+
+</html>

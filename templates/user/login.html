@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - Li</title>
+</head>
+
+<body>
+{% extends "father.html" %}
+{% block content %}
+<div class="layui-panel">
+    <div style="padding: 30px;">
+        <form class="layui-form layui-form-pane">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-block">
+                    <input type="text" id="name" class="layui-input" placeholder="ID / 名称">
+                </div>
+                </span>
+            </div>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" id="password" class="layui-input" placeholder="密码">
+                </div>
+            </div>
+
+        </form>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="swap" class="layui-btn" style="margin: 5px">登录</button>
+                <a href="/user/register">
+                    <button class="layui-btn layui-btn-primary"
+                            style="margin: 5px">注册
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        const name = document.getElementById("name");
+        const password = document.getElementById("password");
+        const swap = document.getElementById("swap");
+
+        function All() {
+            $.ajax({
+                type: "POST",
+                url: "/user/login",
+                dataType: "json",
+                data: {
+                    "name": name.value,
+                    "password": password.value
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+        swap.addEventListener("click", All);
+
+        swap.onclick = function () {
+            $.post("/user/login", function (obj) {
+                layui.use("layer", function () {
+                    var layer = layui.layer;
+
+                    layer.msg(obj.errmsg);
+                });
+            }, "json");
+        }
+
+</script>
+{% endblock %}
+</body>
+
+</html>

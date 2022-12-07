@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="//unpkg.com/layui@2.7.6/dist/css/layui.css" rel="stylesheet">
+    <script src="//unpkg.com/layui@2.7.6/dist/layui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.js"></script>
+    <link href="{{url_for('static',filename='./images/favicon.ico')}}" rel="shortcut icon">
+</head>
+
+<body style="background-color: #f0f0f0">
+<ul class="layui-nav" style="margin-bottom :30px">
+    <li class="layui-nav-item"><a href="/">老李家 / Li</a></li>
+    <li class="layui-nav-item">
+        <a>记录</a>
+        <dl class="layui-nav-child">
+            <dd><a href="/redblack">红黑帐</a></dd>
+            <dd><a href="/days">特殊日</a></dd>
+            <dd><a href="/energy/{{sname}}">能量值</a></dd>
+            <dd><a href="/pk">挑战</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item">
+        <a>其他</a>
+        <dl class="layui-nav-child">
+            <dd><a href="/game">小游戏</a></dd>
+            <dd><a href="/log">开发日志</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item layui-col-lg-offset8 layui-col-md-offset8 layui-col-sm-offset6">
+        {% if sname == "游客" %}
+        <a href="/user/login">登录</a>
+        {% else %}
+        <a>个人中心</a>
+        <dl class="layui-nav-child">
+            <dd><a href="/user/{{sname}}">账号名：{{sname}}</a></dd>
+            <dd><a href="/user/out">退出账户</a></dd>
+            {% endif %}
+        </dl>
+    </li>
+</ul>
+<div class="layui-container layui-anim layui-anim-fadein">
+    <div class="layui-row">
+        {%block content %}
+        {% endblock %}
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <span class="layui-breadcrumb" lay-separator="|">
+        <a href="">Leo永远爱这个家</a>
+        <a href="">老李家/Li - 2022</a>
+        <a href="/redblack">记账</a>
+        <a href="/redblack/text">看记账</a>
+        <a href="/days">特殊日</a>
+        <a href="/days/text">看特殊日</a>
+        <a href="/energy/{{sname}}">能量值</a>
+        <a href="/pk">家庭乱斗</a>
+        <a href="/pk">PK</a>
+        <a href="/log">开发日志</a>
+      </span>
+    </div>
+</div>
+</body>
+
+</html>

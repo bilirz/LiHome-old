@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎回家 - Li</title>
+</head>
+
+<body>
+{% extends "father.html" %}
+{% block content %}
+<div class="layui-panel layui-anim layui-anim-scaleSpring">
+    <div style="padding: 30px;">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">我方</label>
+                <div class="layui-input-block">
+                    <input type="text" id="name" class="layui-input" placeholder="{{sname}}" disabled>
+                </div>
+            </div>
+        </form>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="swap" class="layui-btn" style="margin: 5px">挖宝</button>
+                <a href="/game/rank">
+                    <button class="layui-btn" style="margin: 5px">查看硬币排行榜</button>
+                </a>
+                <a href="/game">
+                    <button class="layui-btn" style="margin: 5px">去决斗</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        const name = document.getElementById("name");
+
+        function All() {
+            $.ajax({
+                type: "POST",
+                url: "/game/coin",
+                dataType: "json",
+                data: {
+                    "name": name.value
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+        swap.addEventListener("click", All);
+
+</script>
+{% endblock %}
+</body>
+
+</html>
