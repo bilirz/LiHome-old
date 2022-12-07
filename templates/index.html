@@ -48,12 +48,26 @@
             </span>
         </div>
     </div>
-
-
+    <div class="layui-panel" style="margin-top: 20px;">
+        <div style="padding: 30px;">
+            <h2 style="margin-bottom :20px; color: #2F4056;">{{ sname }}，看看其他家人吧！</h2>
+            <div class="layui-row">
+                {% for user in users %}
+                <a href="/user/{{ user['name'] }}">
+                    <div class="layui-panel layui-col-md3" style="margin: 10px;">
+                        <div style="padding: 20px;">
+                            {{ user['name'] }}
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="layui-row">
-    <div class="layui-panel layui-col-md4" style="margin-top: 20px;">
+    <div class="layui-panel layui-col-md4" style="margin-top: 20px; margin-right: 10px;">
         <div class="layui-card-header">
             <h3 style="margin: 5px; color: #2F4056;">查看最新红黑帐</h3>
         </div>
@@ -72,7 +86,7 @@
             <a href="/redblack/text">查看更多</a>
         </div>
     </div>
-    <div class="layui-panel layui-col-md4" style="margin-top: 20px;">
+    <div class="layui-panel layui-col-md4" style="margin-top: 20px; margin-right: 10px;">
         <div class="layui-card-header">
             <h3 style="margin: 5px; color: #2F4056;">查看最新特殊日</h3>
         </div>
@@ -94,7 +108,7 @@
             <a href="/days/text">查看更多</a>
         </div>
     </div>
-    <div class="layui-panel layui-col-md4" style="margin-top: 20px;">
+    <div class="layui-panel layui-col-md3" style="margin-top: 20px;">
         <div class="layui-card-header">
             <h3 style="margin: 5px; color: #2F4056;">查看最新排行榜</h3>
         </div>
