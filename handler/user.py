@@ -1,5 +1,9 @@
+import hashlib
+import pymongo
+import time
+import urllib
+
 from flask import Blueprint, render_template, request, session, redirect, jsonify
-import time, pymongo, hashlib, urllib
 
 bp = Blueprint('user', __name__)
 mongo = pymongo.MongoClient('mongodb://127.0.0.1:27017/')
@@ -21,7 +25,11 @@ def login():
     dbf.delete_one({'name': None})
     if request.method == 'POST':
         if dbf.find_one({'name': request.values.get('name')}) is not None:
-            if dbf.find_one({'name': request.values.get('name')})['password'] == md5(request.values.get('password'),dbf.find_one({'name': request.values.get('name')})['time']):
+            if dbf.find_one({'name': request.values.get('name')})['password'] == md5(request.values.get('password'),
+                                                                                     dbf.find_one({
+                                                                                                      'name': request.values.get(
+                                                                                                              'name')})[
+                                                                                         'time']):
                 session['user'] = request.values.get('name')
                 session['status'] = dbf.find_one({"name": request.values.get('name')})['status']
         elif dbf.find_one({'name': request.values.get('name')}) is None:
@@ -68,10 +76,18 @@ def index(name):
                            infos=dbf.find_one({'name': urllib.parse.unquote(name)}),
                            redinfos=mongo['db_li']['redblack'].find(
                                {'$and': [{'bname': urllib.parse.unquote(name)}, {'color': '红'}]}).sort('time', -1),
+                           redinfos_count=mongo['db_li']['redblack'].count_documents(
+                               {'$and': [{'bname': urllib.parse.unquote(name)}, {'color': '红'}]}),
                            blackinfos=mongo['db_li']['redblack'].find(
                                {'$and': [{'bname': urllib.parse.unquote(name)}, {'color': '黑'}]}).sort('time', -1),
+                           blackinfos_count=mongo['db_li']['redblack'].count_documents(
+                               {'$and': [{'bname': urllib.parse.unquote(name)}, {'color': '黑'}]}),
                            wredinfos=mongo['db_li']['redblack'].find(
                                {'$and': [{'name': urllib.parse.unquote(name)}, {'color': '红'}]}).sort('time', -1),
+                           wredinfos_count=mongo['db_li']['redblack'].count_documents(
+                               {'$and': [{'name': urllib.parse.unquote(name)}, {'color': '红'}]}),
                            wblackinfos=mongo['db_li']['redblack'].find(
                                {'$and': [{'name': urllib.parse.unquote(name)}, {'color': '黑'}]}).sort('time', -1),
+                           wblackinfos_count=mongo['db_li']['redblack'].count_documents(
+                               {'$and': [{'name': urllib.parse.unquote(name)}, {'color': '黑'}]})
                            )

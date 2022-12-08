@@ -13,32 +13,31 @@
 <div class="layui-panel" style="margin-bottom: 10px;">
     <div style="padding: 30px;">
         <h1>{{ infos["name"] }}</h1>
-        <p style="margin: 10px;">的账号创立于{{ infos["time"] }}</p>
+        <p style="margin-top: 10px;">的账号创立于{{ infos["time"] }}，至今已有{{ redinfos_count }}个红帐，{{ blackinfos_count }}个黑账，记下{{ wredinfos_count }}个红帐，{{ wblackinfos_count }}个黑账。</p>
     </div>
 </div>
-<div class="layui-panel" style="margin-bottom: 10px;"
-">
-<div style="padding: 30px;">
-    <h2>{{ infos["name"] }}的红帐</h2>
-    <table class="layui-table">
-        <thead>
-        <tr>
-            <th>记账人</th>
-            <th>原因</th>
-            <th>时间</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for redinfo in redinfos %}
-        <tr>
-            <td>{{ redinfo.name }}</td>
-            <td>{{ redinfo.text }}</td>
-            <td>{{ redinfo.time }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+<div class="layui-panel" style="margin-bottom: 10px;">
+    <div style="padding: 30px;">
+        <h2>{{ infos["name"] }}的红帐</h2>
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>记账人</th>
+                <th>原因</th>
+                <th>时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for redinfo in redinfos %}
+            <tr>
+                <td>{{ redinfo.name }}</td>
+                <td>{{ redinfo.text }}</td>
+                <td>{{ redinfo.time }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 <div class="layui-panel" style="margin-bottom: 10px;"
 ">

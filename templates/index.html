@@ -66,6 +66,38 @@
     </div>
 </div>
 
+<div class="layui-panel layui-row" style="margin-top: 20px;">
+    <div style="padding: 30px;">
+        <h2 style="margin-bottom :20px; color: #2F4056;">{{ sname }}，看看家庭成员的表现吧！</h2>
+        <div>
+            <div class="layui-panel layui-col-md3" style="margin-bottom: 20px;">
+                <div class="layui-card-header">
+                    <span style="color: #5FB878;">最能记帐人！</span>
+                </div>
+                <div class="layui-card-body">
+                    {{ award_all }}
+                </div>
+            </div>
+            <div class="layui-panel layui-col-md3" style="margin-bottom: 20px;">
+                <div class="layui-card-header">
+                    <span style="color: #5FB878;">被记红帐最多</span>
+                </div>
+                <div class="layui-card-body">
+                    {{ award_wred }}
+                </div>
+            </div>
+            <div class="layui-panel layui-col-md3" style="margin-bottom: 20px;">
+                <div class="layui-card-header">
+                    <span style="color: #5FB878;">被记黑帐最多</span>
+                </div>
+                <div class="layui-card-body">
+                    {{ award_wblack }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="layui-row">
     <div class="layui-panel layui-col-md4" style="margin-top: 20px; margin-right: 10px;">
         <div class="layui-card-header">
