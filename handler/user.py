@@ -91,8 +91,9 @@ def index(name):
         dbf.update_one({'name':name},{'$set':{'follower':list(following_er_set)}})
     return render_template('user/index.html',
                            sname=session['user'],
-                           following_list=dbf.find_one({'name':session['user']})['following'],
-                           follower_list=dbf.find_one({'name':session['user']})['follower'],
+                           following_user_list=dbf.find_one({'name':session['user']})['following'],
+                           following_list=dbf.find_one({'name':name})['following'],
+                           follower_list=dbf.find_one({'name':name})['follower'],
                            infos=dbf.find_one({'name': urllib.parse.unquote(name)}),
                            redinfos=mongo['db_li']['redblack'].find(
                                {'$and': [{'bname': urllib.parse.unquote(name)}, {'color': '红'}]}).sort('time', -1),
