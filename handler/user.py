@@ -53,6 +53,8 @@ def register():
                 document = {'name': request.values.get('name'),
                             'password': md5(request.values.get('password'), time_),
                             'status': "游客",
+                            'follower': [],
+                            'following': [],
                             'time': time_,
                             }
                 dbf.insert_one(document)
@@ -71,8 +73,26 @@ def out():
 
 @bp.route('/user/<name>', methods=['GET', 'POST'])
 def index(name):
+    if request.values.get('type') == 'follow':
+        follow_set = {'老李家官方'}
+        follower_set = {'老李家官方'}
+        follow_set.update(dbf.find_one({'name':session['user']})['following'])
+        follow_set.add(request.values.get('name'))
+        follower_set.update(dbf.find_one({'name':name})['follower'])
+        follower_set.add(session['user'])
+        dbf.update_one({'name':session['user']},{'$set':{'following':list(follow_set)}})
+        dbf.update_one({'name':name},{'$set':{'follower':list(follower_set)}})
+    elif request.values.get('type') == 'following':
+        following_set = set(dbf.find_one({'name':session['user']})['following'])
+        following_set.remove(request.values.get('name'))
+        dbf.update_one({'name':session['user']},{'$set':{'following':list(following_set)}})
+        following_er_set = set(dbf.find_one({'name':name})['follower'])
+        following_er_set.remove(session['user'])
+        dbf.update_one({'name':name},{'$set':{'follower':list(following_er_set)}})
     return render_template('user/index.html',
                            sname=session['user'],
+                           following_list=dbf.find_one({'name':session['user']})['following'],
+                           follower_list=dbf.find_one({'name':session['user']})['follower'],
                            infos=dbf.find_one({'name': urllib.parse.unquote(name)}),
                            redinfos=mongo['db_li']['redblack'].find(
                                {'$and': [{'bname': urllib.parse.unquote(name)}, {'color': '红'}]}).sort('time', -1),
