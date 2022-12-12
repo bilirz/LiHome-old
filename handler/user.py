@@ -10,10 +10,10 @@ mongo = pymongo.MongoClient('mongodb://127.0.0.1:27017/')
 dbf = mongo['db_li']['users']
 
 
-def md5(a, b):
+def md5(require, salt):
     md = hashlib.md5()
-    md.update(str(a).encode('utf-8'))
-    md.update(str(b).encode('utf-8'))
+    md.update(str(require).encode('utf-8'))
+    md.update(str(salt).encode('utf-8'))
     return md.hexdigest()
 
 
@@ -27,8 +27,8 @@ def login():
         if dbf.find_one({'name': request.values.get('name')}) is not None:
             if dbf.find_one({'name': request.values.get('name')})['password'] == md5(request.values.get('password'),
                                                                                      dbf.find_one({
-                                                                                                      'name': request.values.get(
-                                                                                                              'name')})[
+                                                                                         'name': request.values.get(
+                                                                                             'name')})[
                                                                                          'time']):
                 session['user'] = request.values.get('name')
                 session['status'] = dbf.find_one({"name": request.values.get('name')})['status']
@@ -76,24 +76,27 @@ def index(name):
     if request.values.get('type') == 'follow':
         follow_set = {'老李家官方'}
         follower_set = {'老李家官方'}
-        follow_set.update(dbf.find_one({'name':session['user']})['following'])
+        follow_set.update(dbf.find_one({'name': session['user']})['following'])
         follow_set.add(request.values.get('name'))
-        follower_set.update(dbf.find_one({'name':name})['follower'])
+        follower_set.update(dbf.find_one({'name': name})['follower'])
         follower_set.add(session['user'])
-        dbf.update_one({'name':session['user']},{'$set':{'following':list(follow_set)}})
-        dbf.update_one({'name':name},{'$set':{'follower':list(follower_set)}})
+        dbf.update_one({'name': session['user']}, {'$set': {'following': list(follow_set)}})
+        dbf.update_one({'name': name}, {'$set': {'follower': list(follower_set)}})
     elif request.values.get('type') == 'following':
-        following_set = set(dbf.find_one({'name':session['user']})['following'])
+        following_set = set(dbf.find_one({'name': session['user']})['following'])
         following_set.remove(request.values.get('name'))
-        dbf.update_one({'name':session['user']},{'$set':{'following':list(following_set)}})
-        following_er_set = set(dbf.find_one({'name':name})['follower'])
+        dbf.update_one({'name': session['user']}, {'$set': {'following': list(following_set)}})
+        following_er_set = set(dbf.find_one({'name': name})['follower'])
         following_er_set.remove(session['user'])
-        dbf.update_one({'name':name},{'$set':{'follower':list(following_er_set)}})
+        dbf.update_one({'name': name}, {'$set': {'follower': list(following_er_set)}})
     return render_template('user/index.html',
                            sname=session['user'],
-                           following_user_list=dbf.find_one({'name':session['user']})['following'],
-                           following_list=dbf.find_one({'name':name})['following'],
-                           follower_list=dbf.find_one({'name':name})['follower'],
+                           following_user_list=dbf.find_one({'name': session['user']})['following'],
+                           following_list=dbf.find_one({'name': name})['following'],
+                           follower_list=dbf.find_one({'name': name})['follower'],
+                           person_id=md5(
+                               dbf.find_one({'name': name})['name'] + "md5encrypt" + dbf.find_one({'name': name})[
+                                   'time'], dbf.find_one({'name': name})['time']),
                            infos=dbf.find_one({'name': urllib.parse.unquote(name)}),
                            redinfos=mongo['db_li']['redblack'].find(
                                {'$and': [{'bname': urllib.parse.unquote(name)}, {'color': '红'}]}).sort('time', -1),
