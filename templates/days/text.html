@@ -85,10 +85,7 @@
                         type: "POST",
                         url: "/days/text",
                         dataType: "json",
-                        data:{"type":"comment","name": name{{ i["_id"] }}.value,"text":text{{ i["_id"] }}.value, "id": val{{ i["_id"] }}},
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
+                        data:{"type":"comment","name": name{{ i["_id"] }}.value,"text":text{{ i["_id"] }}.value, "id": val{{ i["_id"] }}}
                     });
                 }
                 swap{{ i["_id"] }}.addEventListener("click", All);
@@ -102,10 +99,7 @@
                         type: "POST",
                         url: "/days/text",
                         dataType: "json",
-                        data:{"type":"delete","id": val{{ i["_id"] }}},
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
+                        data:{"type":"delete","id": val{{ i["_id"] }}}
                     });
                 }
                 btn{{ i["_id"] }}.addEventListener("click", All);

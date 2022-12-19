@@ -127,9 +127,9 @@
                 "punish": punish.value,
                 "notary": notary.value
             },
-            error: function (xhr, status, error) {
-                console.log(error);
-            }
+            success: layui.use("layer", function () {
+                layui.layer.msg("PK发布成功！");
+            })
         });
     }
     swap.addEventListener("click", All);

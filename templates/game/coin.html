@@ -44,9 +44,9 @@
                 data: {
                     "name": name.value
                 },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
+                success: layui.use("layer", function () {
+                    layui.layer.msg("挖宝成功！");
+                })
             });
         }
         swap.addEventListener("click", All);

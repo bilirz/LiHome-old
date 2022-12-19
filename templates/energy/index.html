@@ -61,10 +61,13 @@
             type: "POST",
             url: "/energy",
             dataType: "json",
-            data:{"evalue": evalue.value},
-            error: function (xhr, status, error) {
-                console.log(error);
-            }
+            data: {"evalue": evalue.value},
+            success: layui.use("layer", function () {
+                    layui.layer.msg("添加成功！");
+                })
+            // error: function (xhr, status, error) {
+            //     console.log(error);
+            // }
         });
     }
     swap.addEventListener("click", All);

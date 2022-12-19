@@ -65,7 +65,6 @@
             $.post("/user/login", function (obj) {
                 layui.use("layer", function () {
                     var layer = layui.layer;
-
                     layer.msg(obj.errmsg);
                 });
             }, "json");

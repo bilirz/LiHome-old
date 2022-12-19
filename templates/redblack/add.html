@@ -90,9 +90,9 @@
                 "color": color.value,
                 "text": text.value
             },
-            error: function (xhr, status, error) {
-                console.log(error);
-            }
+            success: layui.use("layer", function () {
+                layui.layer.msg("记录成功！");
+            })
         });
     }
     swap.addEventListener("click", All);

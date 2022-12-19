@@ -30,9 +30,9 @@
                             'type': 'following',
                             'name': "{{ infos['name'] }}"
                         },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
+                        success: layui.use("layer", function () {
+                            layui.layer.msg("取消关注成功！");
+                        })
                     });
                 }
                 following.addEventListener("click", All);
@@ -53,9 +53,9 @@
                             'type': 'follow',
                             'name': "{{ infos['name'] }}"
                         },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
+                        success: layui.use("layer", function () {
+                            layui.layer.msg("关注成功！");
+                        })
                     });
                 }
                 follow.addEventListener("click", All);
@@ -127,8 +127,6 @@
                 }
             ],
             };;
-  
-        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 
 </script>

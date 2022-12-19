@@ -88,9 +88,9 @@
                                         url: "/pk/text",
                                         dataType: "json",
                                         data:{"type":"pk","id": "{{ i["_id"] }}"},
-                                        error: function (xhr, status, error) {
-                                            console.log(error);
-                                        }
+                                        success: layui.use("layer", function () {
+                                            layui.layer.msg("同意成功！");
+                                        })
                                     });
                                 }
                                 pk{{ i["_id"] }}.addEventListener("click", All);
@@ -161,9 +161,9 @@
                         url: "/pk/text",
                         dataType: "json",
                         data:{"type":"comment","name": name{{ i["_id"] }}.value,"text":text{{ i["_id"] }}.value, "id": "{{ i["_id"] }}"},
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
+                        success: layui.use("layer", function () {
+                            layui.layer.msg("评论成功！");
+                        })
                     });
                 }
                 swap{{ i["_id"] }}.addEventListener("click", All);
