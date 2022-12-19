@@ -73,6 +73,26 @@ def out():
 
 @bp.route('/user/<name>', methods=['GET', 'POST'])
 def index(name):
+    data_list = []
+    data_index_a = 0
+    data_index_b = 0
+    xAxis = []
+    series = []
+    if mongo['db_li']['energy'].find_one({'name': name}) is None:
+        mongo['db_li']['energy'].insert_one({
+            'name': name,
+            'charts': []
+        })
+    for i in mongo['db_li']['energy'].find({'name': name}):
+        data_list = (i['charts'])
+
+    for i in range(len(data_list)):
+        xAxis.append(str(data_list[data_index_a]['time']))
+        data_index_a += 1
+
+    for i in range(len(data_list)):
+        series.append(int(data_list[data_index_b]['evalue']))
+        data_index_b += 1
     if request.values.get('type') == 'follow':
         follow_set = {'老李家官方'}
         follower_set = {'老李家官方'}
@@ -91,6 +111,8 @@ def index(name):
         dbf.update_one({'name': name}, {'$set': {'follower': list(following_er_set)}})
     return render_template('user/index.html',
                            sname=session['user'],
+                           xAxis=xAxis, 
+                           series=series,
                            following_user_list=dbf.find_one({'name': session['user']})['following'],
                            following_list=dbf.find_one({'name': name})['following'],
                            follower_list=dbf.find_one({'name': name})['follower'],

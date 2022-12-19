@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ infos["name"] }} - 用户 - Li</title>
     <link href="https://fonts.googleapis.com/css?family=Libre+Barcode+128+Text" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.js"></script>
 </head>
 
 <body>
@@ -100,6 +101,37 @@
     </div>
 </div>
 
+<div class="layui-panel" style="margin-bottom: 10px;">
+    <div style="padding: 30px;">
+        <h2>{{ infos["name"] }}的能量值</h2>
+        <div id="main" style="width: auto;height:400px;"></div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+        var myChart = echarts.init(document.getElementById("main"));
+        var option = {
+            tooltip: {
+                trigger: "axis"
+            },
+            xAxis: {
+                data: {{xAxis|safe}}
+            },
+            yAxis: {},
+            series: [
+                {
+                data: {{series}},
+                type: "line",
+                smooth: true,
+                }
+            ],
+            };;
+  
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+</script>
 
 <div class="layui-panel" style="margin-bottom: 10px;">
     <div style="padding: 30px;">
