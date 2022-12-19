@@ -6,8 +6,8 @@ mongo = pymongo.MongoClient('mongodb://127.0.0.1:27017/')
 dbf = mongo['db_li']['energy']
 
 
-@bp.route('/energy/<name>', methods=['GET', 'POST'])
-def name(name):
+@bp.route('/energy', methods=['GET', 'POST'])
+def index():
     if session.get('user') is None:
         session['user'] = '游客'
         session['status'] = '游客'
@@ -28,8 +28,8 @@ def name(name):
             new_value = {'$push':
                             {'charts': {'evalue': request.values.get('evalue'),
                                         'time': time.strftime('%Y-%m-%d %H:%M:%S')}}}
-            dbf.update_one({'name': name}, new_value)
-        for i in dbf.find({'name': name}):
+            dbf.update_one({'name': session['user']}, new_value)
+        for i in dbf.find({'name': session['user']}):
             data_list = (i['charts'])
 
         for i in range(len(data_list)):
@@ -40,4 +40,4 @@ def name(name):
             series.append(int(data_list[data_index_b]['evalue']))
             data_index_b += 1
 
-        return render_template('energy/index.html', sname=session['user'], name=name, xAxis=xAxis, series=series)
+        return render_template('energy/index.html', sname=session['user'], name=session['user'], xAxis=xAxis, series=series)

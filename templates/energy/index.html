@@ -59,7 +59,7 @@
         function All() {
         $.ajax({
             type: "POST",
-            url: "/energy/{{name}}",
+            url: "/energy",
             dataType: "json",
             data:{"evalue": evalue.value},
             error: function (xhr, status, error) {
