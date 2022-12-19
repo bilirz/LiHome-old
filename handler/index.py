@@ -41,4 +41,6 @@ def index():
         return render_template('index.html', sname=session['user'], users=users, redblack=redblack, days=days, pk=pk,
                                award_all=max(user_all, key=lambda x: user_all[x]),
                                award_wred=max(user_wred, key=lambda x: user_wred[x]),
-                               award_wblack=max(user_wblack, key=lambda x: user_wblack[x]))
+                               award_wblack=max(user_wblack, key=lambda x: user_wblack[x]),
+                               mottos = mongo['db_li']['motto'].find().sort('time', -1).limit(3),
+                               mottos_first = mongo['db_li']['motto'].find().sort('time', -1).limit(1))

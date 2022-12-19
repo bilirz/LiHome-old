@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session
-from handler import father, static, index, log, redblack, days, game, energy, user, pk
+from handler import father, static, index, log, redblack, days, game, energy, user, pk, motto
 import config
 import logging
 
@@ -15,6 +15,7 @@ app.register_blueprint(game.bp)
 app.register_blueprint(energy.bp)
 app.register_blueprint(user.bp)
 app.register_blueprint(pk.bp)
+app.register_blueprint(motto.bp)
 
 app.config.from_object(config)
 
