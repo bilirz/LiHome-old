@@ -5,11 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>欢迎回家 - Li</title>
+    <style>
+        .notice_bar{
+            margin-bottom: 10px;
+            padding: 20px;
+            line-height: 1.6;
+            border-left: 5px solid #5FB878;
+            border-radius: 0 2px 2px 0;
+            background-color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
 {% extends "father.html" %}
 {% block content %}
+    <div class="notice_bar">
+        <p>试运行两个月后，本项目更新至v.1.0.0，相关内容请查阅开发日志。</p>
+    </div>
     <div>
         <div class="layui-panel">
             <div class="card-title">
