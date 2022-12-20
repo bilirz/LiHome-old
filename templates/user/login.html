@@ -10,32 +10,41 @@
 <body>
 {% extends "father.html" %}
 {% block content %}
-<div class="layui-panel">
-    <div style="padding: 30px;">
-        <form class="layui-form layui-form-pane">
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">名称</label>
-                <div class="layui-input-block">
-                    <input type="text" id="name" class="layui-input" placeholder="ID / 名称">
-                </div>
-                </span>
-            </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">密码</label>
-                <div class="layui-input-block">
-                    <input type="password" id="password" class="layui-input" placeholder="密码">
-                </div>
-            </div>
+<div style="margin-top: 20px;">
+    <div class="layui-panel">
+        <div class="card-title">
+            <h3><span>登录</span></h3>
 
-        </form>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button id="swap" class="layui-btn" style="margin: 5px">登录</button>
-                <a href="/user/register">
-                    <button class="layui-btn layui-btn-primary"
-                            style="margin: 5px">注册
-                    </button>
-                </a>
+        </div>
+        <div class="card-line"></div>
+    </div>
+    <div class="layui-panel">
+        <div class="card-body">
+            <form class="layui-form layui-form-pane">
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="name" class="layui-input" placeholder="ID / 名称">
+                    </div>
+                    </span>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" id="password" class="layui-input" placeholder="密码">
+                    </div>
+                </div>
+
+            </form>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="swap" class="layui-btn" style="margin: 5px">登录</button>
+                    <a href="/user/register">
+                        <button class="layui-btn layui-btn-primary"
+                                style="margin: 5px">注册
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -69,6 +78,7 @@
                 });
             }, "json");
         }
+
 
 </script>
 {% endblock %}

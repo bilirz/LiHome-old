@@ -11,29 +11,26 @@
 <body>
 {% extends "father.html" %}
     {% block content %}
-    <div class="layui-panel" style="margin-bottom :10px">
-        <div style="padding: 10px;">
-            <span class="layui-breadcrumb">
-                <a href="/">首页</a>
-                <a href="/days">添加</a>
-                <a><cite>查看</cite></a>
-            </span>
+    {% for i in doct %}
+    <div style="margin-top: 20px;">
+        <div class="layui-panel">
+            <div class="card-title">
+                <h3><span>
+                    {{i["wtime"]}}：{{i["name"]}}
+                    {% if i["bname"] == "null" %}
+                    发布了公告
+                    {% else %}
+                    想要提醒
+                    {{ i["bname"] }}
+                    {% endif %}
+                </span></h3>
+                
+            </div>
+            <div class="card-line"></div>
         </div>
     </div>
-        {% for i in doct %}
         <div>
             <div class="layui-card" style="margin-bottom: 20px;">
-                <div class="layui-card-header">
-                    <span>
-                        {{i["wtime"]}}：{{i["name"]}}
-                        {% if i["bname"] == "null" %}
-                        发布了公告
-                        {% else %}
-                        想要提醒
-                        {{ i["bname"] }}
-                        {% endif %}
-                    </span>
-                </div>
                 <div class="layui-card-body">
                     <h4>在【{{ i["time"] }}】这一天有【{{ i["why"] }}】事件。</span>
                     {% if i["comment"] %}

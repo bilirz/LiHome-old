@@ -10,28 +10,38 @@
 <body>
 {% extends "father.html" %}
 {% block content %}
-<div class="layui-panel layui-anim layui-anim-scaleSpring">
-    <div style="padding: 30px;">
-        <form class="layui-form">
-            <div class="layui-form-item">
-                <label class="layui-form-label">我方</label>
-                <div class="layui-input-block">
-                    <input type="text" id="name" class="layui-input" placeholder="{{sname}}" disabled>
+<div style="margin-top: 20px;" class="layui-anim layui-anim-scaleSpring">
+    <div class="layui-panel">
+        <div class="card-title">
+            <h3><span>挖宝</span></h3>
+
+        </div>
+        <div class="card-line"></div>
+    </div>
+    <div class="layui-panel" style="padding: 20px;">
+        <div class="card-body">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">我方</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="name" class="layui-input" placeholder="{{sname}}" disabled>
+                    </div>
                 </div>
-            </div>
-        </form>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button id="swap" class="layui-btn" style="margin: 5px">挖宝</button>
-                <a href="/game/rank">
-                    <button class="layui-btn" style="margin: 5px">查看硬币排行榜</button>
-                </a>
-                <a href="/game">
-                    <button class="layui-btn" style="margin: 5px">去决斗</button>
-                </a>
+            </form>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="swap" class="layui-btn" style="margin: 5px">挖宝</button>
+                    <a href="/game/rank">
+                        <button class="layui-btn" style="margin: 5px">查看硬币排行榜</button>
+                    </a>
+                    <a href="/game">
+                        <button class="layui-btn" style="margin: 5px">去决斗</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
         const name = document.getElementById("name");
@@ -50,6 +60,8 @@
             });
         }
         swap.addEventListener("click", All);
+
+
 
 </script>
 {% endblock %}

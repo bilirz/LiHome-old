@@ -10,11 +10,19 @@
 <body>
 {% extends "father.html" %}
 {% block content %}
-<div class="layui-panel">
-    <div style="padding: 30px;">
-        <h1>404：不存在的</h1>
-        <p style="margin: 10px;">服务器没有找到该页面。</p>
-        <p style="margin: 10px;">该页面有可能正在施工中，也有可能是您来到了没有知识的荒原。</p>
+<div style="margin-top: 20px;">
+    <div class="layui-panel">
+        <div class="card-title">
+            <h3><span>404：不存在的</span></h3>
+            
+        </div>
+        <div class="card-line"></div>
+    </div>
+    <div class="layui-panel">
+        <div class="card-body">
+            <p style="margin: 10px;">服务器没有找到该页面。</p>
+            <p style="margin: 10px;">该页面有可能正在施工中，也有可能是您来到了没有知识的荒原。</p>
+        </div>
     </div>
 </div>
 {% endblock %}

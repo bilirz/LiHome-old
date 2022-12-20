@@ -11,17 +11,16 @@
 <body>
 {% extends "father.html" %}
 {% block content %}
-<div class="layui-panel" style="margin-bottom :10px">
-    <div style="padding: 10px;">
-            <span class="layui-breadcrumb">
-                <a href="/">首页</a>
-                <a><cite>添加</cite></a>
-            </span>
-    </div>
-</div>
-<div>
+<div style="margin-top: 20px;">
     <div class="layui-panel">
-        <div style="padding: 30px;">
+        <div class="card-title">
+            <h3><span>添加</span></h3>
+
+        </div>
+        <div class="card-line"></div>
+    </div>
+    <div class="layui-panel" style="padding: 20px;">
+        <div class="card-body">
             <form class="layui-form layui-form-pane">
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label">记账人</label>
@@ -72,7 +71,6 @@
 
         </div>
     </div>
-</div>
 </body>
 <script>
     // const name = document.getElementById("name");
@@ -97,6 +95,7 @@
         });
     }
     swap.addEventListener("click", All);
+
 
 
 </script>
