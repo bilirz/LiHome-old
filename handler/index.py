@@ -37,8 +37,8 @@ def index():
 
         redblack = mongo['db_li']['redblack'].find().sort('time', -1).limit(3)
         days = mongo['db_li']['days'].find().sort('time', -1).limit(4)
-        pk = mongo['db_li']['pk'].find().sort('coin', -1).limit(3)
-        return render_template('index.html', sname=session['user'], users=users, redblack=redblack, days=days, pk=pk,
+        game = mongo['db_li']['game'].find().sort('coin', -1).limit(3)
+        return render_template('index.html', sname=session['user'], users=users, redblack=redblack, days=days, game=game,
                                award_all=max(user_all, key=lambda x: user_all[x]),
                                award_wred=max(user_wred, key=lambda x: user_wred[x]),
                                award_wblack=max(user_wblack, key=lambda x: user_wblack[x]),
