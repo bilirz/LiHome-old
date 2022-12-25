@@ -54,19 +54,19 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">评论人</label>
                                 <div class="layui-input-block">
-                                    <input type="text" id ="name{{ i["_id"] }}" class="layui-input" placeholder="{{sname}}" disabled>
+                                    <input type="text" id ="name{{ i['_id'] }}" class="layui-input" placeholder="{{sname}}" disabled>
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">评论：</label>
                                 <div class="layui-input-block">
-                                    <textarea type="text" id="text{{ i["_id"] }}" placeholder="评论内容" class="layui-textarea"></textarea>
+                                    <textarea type="text" id="text{{ i['_id'] }}" placeholder="评论内容" class="layui-textarea"></textarea>
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <div class="layui-input-block">
-                                    <button id="swap{{ i["_id"] }}" class="layui-btn" style="margin: 5px">评论</button>
-                                    <button id="{{ i["_id"] }}" data="{{ i["_id"] }}" class="layui-btn" style="margin: 5px;">删除</button>
+                                    <button id="swap{{ i['_id'] }}" class="layui-btn" style="margin: 5px">评论</button>
+                                    <button id="{{ i['_id'] }}" data="{{ i['_id'] }}" class="layui-btn" style="margin: 5px;">删除</button>
                                 </div>
                             </div>
                         </form>
@@ -74,10 +74,10 @@
                 </div>
             </div>
             <script>
-                const name{{ i["_id"] }} = document.getElementById("name{{ i["_id"] }}");
-                const text{{ i["_id"] }} = document.getElementById("text{{ i["_id"] }}");
-                const swap{{ i["_id"] }} = document.getElementById("swap{{ i["_id"] }}");
-                var val{{ i["_id"] }} = $("#{{ i["_id"] }}").attr("data");
+                const name{{ i["_id"] }} = document.getElementById("name{{ i['_id'] }}");
+                const text{{ i["_id"] }} = document.getElementById("text{{ i['_id'] }}");
+                const swap{{ i["_id"] }} = document.getElementById("swap{{ i['_id'] }}");
+                var val{{ i["_id"] }} = $("#{{ i['_id'] }}").attr("data");
 
                 function All() {
                     $.ajax({
@@ -90,8 +90,8 @@
                 swap{{ i["_id"] }}.addEventListener("click", All);
             </script>
             <script>
-                var btn{{ i["_id"] }} = document.getElementById("{{ i["_id"] }}");
-                var val{{ i["_id"] }} = $("#{{ i["_id"] }}").attr("data");
+                var btn{{ i["_id"] }} = document.getElementById("{{ i['_id'] }}");
+                var val{{ i["_id"] }} = $("#{{ i['_id'] }}").attr("data");
                 
                 function All() {
                     $.ajax({
